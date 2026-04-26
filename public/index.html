@@ -91,12 +91,30 @@
 
       <div id="modal-pending">
         <p class="section-label" style="margin-bottom: 12px;">Pay with Ko-fi</p>
-        <h2 class="modal-title">One euro. One pixel.</h2>
-        <p class="modal-text">To claim your pixel, send €1 on Ko-fi and paste this code into the message field.</p>
+        <h2 class="modal-title">Two steps to claim your pixel.</h2>
 
-        <div class="payment-code">
-          <code id="modal-token">PXL-XXXXXXXX</code>
-          <button id="copy-token" type="button">Copy</button>
+        <div class="modal-step">
+          <div class="modal-step-num">1</div>
+          <div class="modal-step-body">
+            <h3 class="modal-step-title">Copy this code</h3>
+            <div class="payment-code">
+              <code id="modal-token">PXL-XXXXXXXX</code>
+              <button id="copy-token" type="button">Copy</button>
+            </div>
+            <p id="copy-confirm" class="copy-confirm" hidden>Copied to clipboard</p>
+          </div>
+        </div>
+
+        <div class="modal-step">
+          <div class="modal-step-num">2</div>
+          <div class="modal-step-body">
+            <h3 class="modal-step-title">Open Ko-fi, paste the code in the message field, pay €1</h3>
+          </div>
+        </div>
+
+        <div class="modal-warning" role="note">
+          <span class="modal-warning-icon" aria-hidden="true">⚠</span>
+          <p><strong>Paste only the code.</strong> Do not write anything else. Without the code your pixel cannot be placed automatically.</p>
         </div>
 
         <a id="kofi-link" href="#" target="_blank" rel="noopener" class="modal-cta">

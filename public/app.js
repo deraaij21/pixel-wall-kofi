@@ -34,6 +34,7 @@ const modalSuccess = document.getElementById('modal-success');
 const modalExpired = document.getElementById('modal-expired');
 const modalToken = document.getElementById('modal-token');
 const copyTokenBtn = document.getElementById('copy-token');
+const copyConfirm = document.getElementById('copy-confirm');
 const kofiLink = document.getElementById('kofi-link');
 const modalStatusText = document.getElementById('modal-status-text');
 const successCoords = document.getElementById('success-coords');
@@ -218,10 +219,12 @@ cta.addEventListener('click', async () => {
   }
 });
 
-function openPaymentModal(reservation, x, y) {
+async function openPaymentModal(reservation, x, y) {
   modalToken.textContent = reservation.token;
   kofiLink.href = reservation.kofiUrl;
   modalStatusText.textContent = 'Waiting for your payment';
+  copyTokenBtn.textContent = 'Copy';
+  copyConfirm.hidden = true;
   modalPending.hidden = false;
   modalSuccess.hidden = true;
   modalExpired.hidden = true;
@@ -229,6 +232,14 @@ function openPaymentModal(reservation, x, y) {
 
   activeToken = reservation.token;
   startPolling(reservation.token, x, y, reservation.expiresAt);
+
+  try {
+    await navigator.clipboard.writeText(reservation.token);
+    copyTokenBtn.textContent = 'Copied';
+    copyConfirm.hidden = false;
+  } catch (err) {
+    // Clipboard blocked (e.g. insecure context, permissions). User can still click Copy.
+  }
 }
 
 function closeModal() {
@@ -302,9 +313,8 @@ copyTokenBtn.onclick = async () => {
   const token = modalToken.textContent;
   try {
     await navigator.clipboard.writeText(token);
-    const original = copyTokenBtn.textContent;
     copyTokenBtn.textContent = 'Copied';
-    setTimeout(() => { copyTokenBtn.textContent = original; }, 1500);
+    copyConfirm.hidden = false;
   } catch (err) {
     const range = document.createRange();
     range.selectNode(modalToken);
