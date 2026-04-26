@@ -108,13 +108,27 @@
         <div class="modal-step">
           <div class="modal-step-num">2</div>
           <div class="modal-step-body">
-            <h3 class="modal-step-title">On Ko-fi, click "Leave a comment" to open the message field, paste the code there, then pay €1</h3>
+            <h3 class="modal-step-title">On Ko-fi, paste the code in the "Your message" field, then click Donate €1</h3>
+            <figure class="kofi-screenshot">
+              <img src="/screenshot.png" alt="Ko-fi donation panel showing the Your message field where the code must be pasted">
+              <span class="kofi-arrow" aria-hidden="true">
+                <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                      <polygon points="0 0, 6 3, 0 6" fill="#E24B4A"/>
+                    </marker>
+                  </defs>
+                  <path d="M 10 10 Q 40 30 60 60" stroke="#E24B4A" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                </svg>
+              </span>
+              <span class="kofi-arrow-label">Paste this code here</span>
+            </figure>
           </div>
         </div>
 
         <div class="modal-warning" role="note">
           <span class="modal-warning-icon" aria-hidden="true">⚠</span>
-          <p><strong>Paste in the comment field BEFORE paying.</strong> The "Say thank you" screen that appears <em>after</em> payment does not reach us — your pixel cannot be placed if you put the code there. Only the code, no other text.</p>
+          <p><strong>Paste in the "Your message" field BEFORE paying.</strong> The "Say thank you" screen that appears <em>after</em> Donate does not reach us — your pixel cannot be placed if you put the code there. Only the code, no other text.</p>
         </div>
 
         <a id="kofi-link" href="#" target="_blank" rel="noopener" class="modal-cta">

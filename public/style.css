@@ -456,6 +456,62 @@ footer p { margin: 0; }
   font-weight: 500;
 }
 
+/* Annotated Ko-fi screenshot inside Step 2.
+   --arrow-top/--arrow-left position the arrow tip relative to the image;
+   tweak after dropping in a new screenshot. */
+.kofi-screenshot {
+  --arrow-top: 74%;
+  --arrow-left: 54%;
+  --arrow-size: 70px;
+  --label-top: calc(var(--arrow-top) - 28px);
+  --label-left: calc(var(--arrow-left) - 140px);
+  position: relative;
+  margin: 14px 0 4px;
+  border: 1px solid var(--border);
+  background: white;
+  display: block;
+  line-height: 0;
+}
+
+.kofi-screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.kofi-arrow {
+  position: absolute;
+  top: var(--arrow-top);
+  left: var(--arrow-left);
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  transform: translate(-100%, -100%);
+  pointer-events: none;
+}
+
+.kofi-arrow svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+}
+
+.kofi-arrow-label {
+  position: absolute;
+  top: var(--label-top);
+  left: var(--label-left);
+  background: #E24B4A;
+  color: white;
+  padding: 6px 12px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 1.2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  pointer-events: none;
+}
+
 .modal-warning {
   display: grid;
   grid-template-columns: 24px 1fr;
