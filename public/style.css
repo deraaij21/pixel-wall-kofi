@@ -2,6 +2,8 @@
    Editorial minimal: warm paper background, Fraunces serif display,
    IBM Plex for body and data. The wall is the centerpiece. */
 
+[hidden] { display: none !important; }
+
 :root {
   --bg: #F4F1EA;
   --frame: #ECE7DA;
