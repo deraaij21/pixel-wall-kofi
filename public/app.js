@@ -301,7 +301,7 @@ function startPolling(token, x, y, expiresAt) {
         activePollInterval = null;
         showExpired();
       } else if (attempts > 5 && attempts % 5 === 0) {
-        modalStatusText.textContent = 'Still waiting. Did you paste the code?';
+        modalStatusText.textContent = 'Still waiting. Did you paste the code in the comment field BEFORE paying?';
       }
     } catch (err) {
       // ignore, retry
