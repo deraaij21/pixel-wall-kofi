@@ -1,0 +1,21 @@
+{
+  "name": "pixel-wall-kofi",
+  "version": "1.0.0",
+  "description": "One million pixels. One pixel per person. One euro each. Permanent. Powered by Ko-fi.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "zod": "^3.23.8"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}

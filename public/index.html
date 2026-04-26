@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixel Wall — One euro. One pixel. Yours forever.</title>
+  <meta name="description" content="One million pixels. One pixel per person. One euro each. Permanent.">
+  <meta property="og:title" content="Pixel Wall">
+  <meta property="og:description" content="One euro. One pixel. Yours forever.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Pixel Wall</a>
+    <div class="counter" id="counter">— / 1,000,000</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 class="title">One euro.<br>One pixel.<br><em>Yours forever.</em></h1>
+      <p class="lede">One million pixels arranged on a 1000 by 1000 grid. Pick a spot, pick a color, leave a name if you want. Once your payment confirms, your pixel is locked into the wall and can never be moved.</p>
+    </section>
+
+    <section class="wall-section">
+      <div class="wall-frame">
+        <canvas id="wall" width="1000" height="1000" aria-label="Pixel Wall"></canvas>
+        <button class="back-btn" id="back" hidden type="button">Back to wall</button>
+        <span class="mode-label" id="mode">Click to zoom in</span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-stats">
+          <span class="placed-count"><strong id="placed">0</strong> placed</span>
+          <span class="placed-percent" id="percent">0.00%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="claim-section" id="claim" hidden>
+      <p class="section-label">Claim a pixel</p>
+      <h2 class="claim-title">Pick a pixel <span id="coords">—</span></h2>
+
+      <div class="form-group">
+        <label>Pick a color</label>
+        <div class="palette" id="palette"></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" maxlength="40" placeholder="Anonymous" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="message">Short message</label>
+          <input type="text" id="message" maxlength="140" placeholder="Hello world" autocomplete="off">
+        </div>
+      </div>
+
+      <button class="cta" id="cta" disabled type="button">Click an empty pixel above</button>
+      <p class="fine-print">€1.00 paid via Ko-fi (iDEAL or card). Placement is permanent. No edits, no refunds after the wall confirms.</p>
+    </section>
+
+    <section class="about">
+      <p class="section-label">What is this</p>
+      <p>One million pixels. One pixel per person. Once you place yours, it stays exactly where you put it. No accounts, no edits, no second chances.</p>
+      <p>When the wall fills up, the artwork is finished. The page stays online as a permanent record of every person who took part.</p>
+    </section>
+
+    <section class="steps">
+      <div class="step"><span class="step-num">01</span><p>Click anywhere on the wall to zoom in</p></div>
+      <div class="step"><span class="step-num">02</span><p>Pick a pixel and a color</p></div>
+      <div class="step"><span class="step-num">03</span><p>Pay €1 via Ko-fi to claim your pixel forever</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Pixel Wall. Payments processed by Ko-fi.</p>
+  </footer>
+
+  <div id="payment-modal" class="modal" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Close">×</button>
+
+      <div id="modal-pending">
+        <p class="section-label" style="margin-bottom: 12px;">Pay with Ko-fi</p>
+        <h2 class="modal-title">One euro. One pixel.</h2>
+        <p class="modal-text">To claim your pixel, send €1 on Ko-fi and paste this code into the message field.</p>
+
+        <div class="payment-code">
+          <code id="modal-token">PXL-XXXXXXXX</code>
+          <button id="copy-token" type="button">Copy</button>
+        </div>
+
+        <a id="kofi-link" href="#" target="_blank" rel="noopener" class="modal-cta">
+          Open Ko-fi to pay
+        </a>
+
+        <div class="modal-status">
+          <span class="modal-spinner" aria-hidden="true"></span>
+          <span id="modal-status-text">Waiting for your payment</span>
+        </div>
+
+        <p class="modal-hint">Keep this window open. As soon as Ko-fi confirms your payment, your pixel will appear on the wall.</p>
+      </div>
+
+      <div id="modal-success" hidden>
+        <p class="section-label" style="margin-bottom: 12px;">Pixel placed</p>
+        <h2 class="modal-title">It's <em>yours.</em></h2>
+        <p class="modal-text">Your pixel is locked into the wall at <span id="success-coords" style="font-family: 'IBM Plex Mono', monospace;">—</span>.</p>
+        <button id="modal-done" class="modal-cta" type="button">Back to the wall</button>
+      </div>
+
+      <div id="modal-expired" hidden>
+        <p class="section-label" style="margin-bottom: 12px;">Reservation expired</p>
+        <h2 class="modal-title">Time ran out.</h2>
+        <p class="modal-text">Your reservation has expired. The pixel is available again. Pick it (or another one) and try again.</p>
+        <button id="modal-retry" class="modal-cta" type="button">Try again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
